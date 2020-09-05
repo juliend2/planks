@@ -8,7 +8,7 @@ services:
         image: nginx:stable-alpine
         container_name: LEMP_nginx
         ports:
-            - "8080:80"
+            - "8181:80"
         volumes:
             - ./code:/code
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -26,33 +26,34 @@ services:
             - "3306:3306"
         depends_on:
             - nginx
-        environment:
-            - MYSQL_ROOT_PASSWORD=654321          
         networks:
-            - LEMP    
+            - LEMP
+        env_file:
+            - .env
 
     php:
-        image: php:7-fpm-alpine
+        build: .
         container_name: LEMP_php
         volumes:
             - ./code:/code
         ports:
-            - "9000:9000"       
+            - "9000:9000"
         networks:
             - LEMP
+        env_file:
+            - .env
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: LEMP_phpMyAdmin
         ports:
             - "8183:80"
-        environment:        
+        environment:
             PMA_ARBITRARY: 1
         depends_on:
             - mariaDB
         networks:
             - LEMP
-    
-
-
+        env_file:
+            - .env
 
