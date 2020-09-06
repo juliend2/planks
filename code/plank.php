@@ -15,7 +15,13 @@ endif;
 <body>
 <?php if (isset($_GET['id'])): ?>
 
-<h1 class="plank-name">Plank <?php  ?> </h1>
+<script>
+$(function() {
+  PlankBoxes.init('.boxes', <?php echo $_GET['id'] ?>);
+});
+</script>
+
+<h1 class="plank-name">Plank  </h1>
 
 <table class="boxes">
   <?php
@@ -24,14 +30,22 @@ endif;
   for ($y = 1; $y < 10; $y++):
     ?><tr><?php
     for ($x = 1; $x < 10; $x++):
-      ?>
-      <td class="box" data-editing="false">
-        <?php #echo "$x, $y" ?>
-        <?php foreach ($boxes as $box): ?>
-          <?php if ($box['x_cell'] == $x && $box['y_cell'] == $y): ?>
-            <?php echo $box['content'] ?>
-          <?php endif ?>
-        <?php endforeach ?>
+      foreach ($boxes as $box) {
+        if ($box['x_cell'] == $x && $box['y_cell'] == $y) {
+          $content = $box['content'];
+          $id = $box['id'];
+        }
+        else {
+          $id = '';
+          $content = null;
+        }
+      } ?>
+      <td class="box"
+          data-x="<?php echo $x ?>"
+          data-y="<?php echo $y ?>"
+          data-id="<?php echo $id ?>"
+          data-editing="false">
+        <?php echo $content ?>
       </td>
       <?php
     endfor;
