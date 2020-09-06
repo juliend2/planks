@@ -1,15 +1,11 @@
-# LEMP stack
-a simple LEMP using the *Offical* Docker Repository for Alpine Linux, Nginx, MariaDB, PHP and phpMyAdmin
+# Planks
 
-### for start LEMP: 
+A simple spreadhseet-like view for managing data, while letting you mess with
+HTML if you want. (SO IT IS UNSAFE FOR PUBLIC USE).
+
+### for start: 
 ``docker-compose up -d``
-### for stop LEMP:
+### for stop:
 ``docker-compose stop``
-### for remove LEMP:
+### for remove:
 `` docker-compose down``
-
-![lemp-container](https://github.com/frekans7/docker-compose-lemp/blob/master/LEMP/code/img/LEMP.gif)
-
-![php](https://github.com/serkan7/docker-compose-lemp/blob/master/LEMP/code/img/php.png)
-
-![phpMyAdmin](https://github.com/serkan7/docker-compose-lemp/blob/master/LEMP/code/img/phpMyAdmin.png)
