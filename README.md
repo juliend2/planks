@@ -9,3 +9,7 @@ HTML if you want. (SO IT IS UNSAFE FOR PUBLIC USE).
 ``docker-compose stop``
 ### for remove:
 `` docker-compose down``
+
+## TODO:
+
+- [ ] Add basic authentication
