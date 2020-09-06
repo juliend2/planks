@@ -1,51 +1,49 @@
 <?php
 
+include 'inc.php';
+
 $this_filename = basename($_SERVER['SCRIPT_FILENAME']);
 
-$servername = "mariaDB";
-$username = "root";
-$password = getenv('MYSQL_ROOT_PASSWORD');
-$dbname = 'planks';
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  #echo "Connected successfully";
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-  die;
-}
-
-
-$plank = $_POST['plank'];
-if (!empty($plank)) {
-  $success = $conn->prepare("INSERT INTO planks (name) VALUES (?)")->execute([$plank['name']]);
-  if ($success) {
-    header('Location: '.$this_filename.'?status=success');
-  }
-} else {
-}
+if (isset($_GET['id'])):
+else:
+  maybe_insert_plank($conn, $this_filename.'?status=success');
+endif;
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-</head>
+  <?php head() ?>
 <body>
-<h1>Create your plank</h1>
-<?php if (isset($_GET['status'])): ?>
-  <?php if ($_GET['status'] == 'success'): ?>
-    <p>Success!</p>
-  <?php elseif ($_GET['status'] == 'error'): ?>
-    <p>Error!</p>
-  <?php else: ?>
-    <p><?php echo $_GET['status'] ?></p>
-  <?php endif ?>
+<?php if (isset($_GET['id'])): ?>
+
+<h1 class="plank-name">Plank <?php  ?> </h1>
+
+<table class="boxes">
+  <?php
+
+  $boxes = get_boxes_by_plank($conn, $_GET['id']);
+  for ($y = 1; $y < 10; $y++):
+    ?><tr><?php
+    for ($x = 1; $x < 10; $x++):
+      ?>
+      <td class="box" data-editing="false">
+        <?php #echo "$x, $y" ?>
+        <?php foreach ($boxes as $box): ?>
+          <?php if ($box['x_cell'] == $x && $box['y_cell'] == $y): ?>
+            <?php echo $box['content'] ?>
+          <?php endif ?>
+        <?php endforeach ?>
+      </td>
+      <?php
+    endfor;
+    ?></tr><?php
+  endfor;
+  ?>
+</table>
+
+
+<?php else: ?>
+  <?php new_plank_form($this_filename); ?>
+  <a href="index.php">Cancel</a>
 <?php endif ?>
-<form method="POST" action="<?php echo $this_filename ?>">
-  <input type="text" name="plank[name]" placeholder="name" required>
-  <br>
-  <input type="submit">
-</form>
 </body>
 </html>

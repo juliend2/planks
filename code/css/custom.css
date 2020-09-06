@@ -1,46 +1,35 @@
-#lemp{
-	display:inline-block; 	
-	margin-top: 218px;
-	margin-left: 197px;
+
+/* /////////////////////////////////////////////////////////////// */
+
+html, body {
+  padding: 0;
+  margin: 0;
 }
 
-.sprite{
-	position:relative;
-	width:950px;
-	height:64px;
-	border:1px hidden black;
+/* /////////////////////////////////////////////////////////////// */
+
+
+table {
+  border-collapse: collapse;
 }
 
-.sprite li{
-list-style:none;
-width:64px;
-height:64px;
-background-image:url(../img/sprite.png);
-background-repeat: no-repeat;
-float:left;
-padding-left:25px;
-transition : background 0.35s;
--webkit-transition: background 0.35s;
--moz-transition: background 0.35s;
--o-transition:background 0.35s;
+table, th, td {
+  border: 1px solid black;
 }
 
+/* h1 */.plank-name {
+  height: 100px;
+  line-height: 100px;
+  white-space: nowrap;
+  padding: 0 10px ;
+  margin: 0;
+}
 
-.alpine {background-position:0 0;}
-.nginx {background-position:0 -148px;}
-.maria {background-position:0 -296px;}
-.php {background-position:0 -444px;}
-.my {background-position:0 -592px;}
-
-.alpine:hover {background-position:0 -74px;}
-.nginx:hover {background-position:0 -222px;}
-.maria:hover {background-position:0 -370px;}
-.php:hover {background-position:0 -518px;}
-.my:hover {background-position:0 -666px;}
-
-
-body {
-
-    background-image: url(../img/docker-lemp.png);
-    background-repeat: no-repeat;
+/* table */.boxes {
+  width: 100%;
+  min-height: calc(100vh - 100px);
+}
+/* td */.box {
+  min-width: 10vw;
+  max-height: 10vh;
 }
