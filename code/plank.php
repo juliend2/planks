@@ -11,8 +11,13 @@ endif;
 ?>
 <!DOCTYPE html>
 <html>
-  <?php head() ?>
+<?php
+head();
+?>
 <body>
+
+<a href="/" class="back">< Go back</a>
+
 <?php if (isset($_GET['id'])): ?>
 
 <script>
