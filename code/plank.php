@@ -30,14 +30,12 @@ $(function() {
   for ($y = 1; $y < 10; $y++):
     ?><tr><?php
     for ($x = 1; $x < 10; $x++):
+      $content = null;
+      $id = null;
       foreach ($boxes as $box) {
         if ($box['x_cell'] == $x && $box['y_cell'] == $y) {
           $content = $box['content'];
           $id = $box['id'];
-        }
-        else {
-          $id = '';
-          $content = null;
         }
       } ?>
       <td class="box"
